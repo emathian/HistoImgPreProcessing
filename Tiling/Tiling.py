@@ -131,30 +131,30 @@ def full_pictures_to_tiles(imgfilename, inputdir, outputdir):
         img  = OpenSlide(filepath)
         if imgfilename.find(".svs") != -1 :
             if str(img.properties.values.__self__.get('tiff.ImageDescription')).split("|")[1] == "AppMag = 40":
-                sz = 512
-                seq = 512
+                sz = 384
+                seq = 384
                 # Others
                 # sz=1024
                 # seq=924
             else:
                 # Pathonet Resolution
-                sz = 512
-                seq = 512
+                sz = 192
+                seq = 192
                 # Others
                 # sz=512
                 # seq=462
         elif  imgfilename.find("mrxs") != -1:
             if str(img.properties.values.__self__.get("mirax.GENERAL.OBJECTIVE_MAGNIFICATION")) == 20:
                 # Pathonet
-                sz = 512 
-                seq = 512
+                sz = 192 
+                seq = 192
                 # Others
                 # sz=512
                 # seq=462
             else: 
                 # Paathonet
-                sz = 512 
-                seq = 512
+                sz = 384 
+                seq = 384
                 # Others 
                 # sz=1024
                 # seq=924
@@ -221,9 +221,22 @@ if __name__ == "__main__":
             with Pool(len(images_l)) as p:
                 p.starmap(full_pictures_to_tiles, array_of_args)
     else:
-        FileSample_c = FileSample.split('.')[0]
-        #FileSample_c =  FileSample_c.split('_')[0]
-        # if FileSample_c not in os.listdir(outputdir):
-        #if FileSample in fname2Tiles:
-        print('FileSample  ', FileSample)
-        full_pictures_to_tiles(FileSample, inputdir, outputdir)
+        c =0 
+        if FileSample not in os.listdir(outputdir) and (FileSample.find('svs') !=-1 or FileSample.find('mrxs') !=-1 ):
+            full_pictures_to_tiles(FileSample, inputdir, outputdir)
+                 
+        # for FileSample in  os.listdir(inputdir):
+        #     if FileSample not in os.listdir(outputdir) and (FileSample.find('svs') !=-1 or FileSample.find('mrxs') !=-1 ):
+        #         if len( FileSample.split('_')) >= 2:
+        #             if FileSample.split('_')[1].find('20') == -1: 
+        #                 #full_pictures_to_tiles(FileSample, inputdir, outputdir)
+        #                 t = 0
+        #         elif FileSample.find('_') == -1:
+        #             print(FileSample)
+        #             c += 1
+        print(c)
+        # if FileSample.find('TNE0180-HPS') != -1 or  FileSample.find('TNE0181-HPS') != -1 or \
+        # FileSample.find('TNE0305-HPS') != -1 or FileSample.find('TNE0360') != -1 or FileSample.find('TNE0404-HPS') != -1 :
+        # FileSample_c = FileSample.split('.')[0]
+        # print('FileSample  ', FileSample)
+        # full_pictures_to_tiles(FileSample, inputdir, outputdir)

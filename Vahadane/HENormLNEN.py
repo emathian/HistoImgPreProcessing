@@ -16,8 +16,8 @@ global outputdir
 
 
 
-directory_target   = '/home/mathiane/LNENWork/Tiles_HE_omics_384_384'
-TARGET_PATH_HE = directory_target  + '/TNE1344/accept/'+'/TNE1344_86401_41857.jpg'
+directory_target   = '/home/mathiane/LNENWork/Tiles_HE_all_samples_384_384_2'
+TARGET_PATH_HE = directory_target  + '/TNE1344-HPS/accept/'+'/TNE1344-HPS_86401_41857.jpg'
 # TARGET_PATH_HES = directory_target + '/TNE0952/'+'TNE0952_15733_17481.jpg'
 target_imageHE = utils.read_image(TARGET_PATH_HE)
 # target_imageHES = utils.read_image(TARGET_PATH_HES)
@@ -56,7 +56,7 @@ except:
 acc_reject_foder = os.listdir(os.path.join(inputdir,sample_ID_folder))
 for folder in acc_reject_foder:
     files = os.listdir(os.path.join(inputdir,sample_ID_folder,folder))
-    if folder == 'accept':
+    if folder == 'Tumor' or folder == 'Normal' :
         try:
             os.mkdir(os.path.join(outputdir, sample_ID_folder, folder))
         except:

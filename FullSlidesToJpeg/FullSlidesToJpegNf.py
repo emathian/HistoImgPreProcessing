@@ -128,10 +128,21 @@ if __name__ == "__main__":
     inputfile = args.inputfile
     inputdir = args.inputdir
     imgfilename = inputfile # inputfile.split('/')[-1]
+    tneid = imgfilename[:7]
     imgoutfname = inputfile.split('.')[0] + '.jpg'
     print('imgoutfname ', imgoutfname, 'imgfilename  ', imgfilename, '\n inputdir ', inputdir)
-    if   imgoutfname not in  os.listdir(outputdir) : 
-        print('ok')
+    tneid_output = []
+    print('len outputdir ', len(os.listdir(outputdir)))
+    tot_img_input = []
+    for ele in os.listdir(inputdir):
+        if ele.find('svs') != -1 or ele.find('mrxs') !=-1:
+            tot_img_input.append(ele[:7])
+    print('len Inout ', len(tot_img_input))
+
+    for ele in os.listdir(outputdir) : 
+        tneid_output.append(ele[:7])
+    
+    if   tneid not in  os.listdir(outputdir) :      
         full_slide_to_jpeg(imgfilename, inputdir, outputdir)
         
 #     for f in os.listdir(inputdir):

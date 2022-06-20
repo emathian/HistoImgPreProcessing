@@ -1,5 +1,5 @@
 #!/usr/bin/env nextflow
-imagelist = Channel.fromPath("/data/lungNENomics/files/Internal_Data/Images/LCNEC/*{svs,mrxs}")
+imagelist = Channel.fromPath("/home/mathiane/LNEN_files_imgs/LunGNeNOmicsImagesBatch123/*{svs,mrxs}")
 process FullSlidesToJpeg{
     publishDir '/home/mathiane/LNENWork/LCNECFullImgJPG'
     conda "/home/mathiane/miniconda3/envs/ImgProcess"
@@ -7,6 +7,6 @@ process FullSlidesToJpeg{
     file img from imagelist
     script:
     """
-    python /home/mathiane/ImgProcessing/FullSlidesToJpeg/FullSlidesToJpegNf.py --inputdir /data/lungNENomics/files/Internal_Data/Images/LCNEC  --inputfile $img --outputdir /home/mathiane/LNENWork/CNECFullImgJPG/LCNECFullImgJPG
+    python /home/mathiane/ImgProcessing/FullSlidesToJpeg/FullSlidesToJpegNf.py --inputdir /home/mathiane/LNEN_files_imgs/LunGNeNOmicsImagesBatch123  --inputfile $img --outputdir /home/mathiane/LNENWork/FullSlidesToJpegHENormHighQuality
     """
 }

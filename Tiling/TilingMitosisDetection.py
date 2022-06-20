@@ -182,5 +182,8 @@ if __name__ == "__main__":
             with Pool(len(images_l)) as p:
                 p.starmap(full_pictures_to_tiles, array_of_args)
     else:
-        full_pictures_to_tiles(FileSample, inputdir, outputdir)
+        if FileSample not in os.listdir(outputdir):
+            if FileSample.split('_').find('20') == -1: 
+                print(FileSample)
+                #full_pictures_to_tiles(FileSample, inputdir, outputdir)
             
